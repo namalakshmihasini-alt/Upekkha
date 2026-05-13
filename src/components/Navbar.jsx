@@ -7,8 +7,9 @@ const NAV_LINKS = [
   { label: 'Impact', href: '/#impact' },
   { label: 'Project Astitva', href: '/astitva' },
   { label: 'Programs', href: '/#programs' },
+  { label: 'Our People', href: '/our-people' },
   { label: 'Reports', href: '/reports' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Contact', href: '/contact' }, // Updated from /#contact to /contact
 ]
 
 export default function Navbar() {
@@ -42,18 +43,25 @@ export default function Navbar() {
 
   const handleNav = (href) => {
     setMenuOpen(false)
-    if (!href.startsWith('/#')) {
-      navigate(href)
-      return
-    }
-    const selector = href.slice(1)
-    if (location.pathname === '/') {
-      const el = document.querySelector(selector)
-      el && el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    
+    // Check if it's a section on the home page (starts with /#)
+    if (href.startsWith('/#')) {
+      const selector = href.slice(1) // gets the #id
+      if (location.pathname === '/') {
+        const el = document.querySelector(selector)
+        el && el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      } else {
+        navigate('/', { state: { scrollTo: selector } })
+      }
     } else {
-      navigate('/', { state: { scrollTo: selector } })
+      // It's a standard page route (like /contact)
+      navigate(href)
+      window.scrollTo(0, 0) // Ensure new page starts at top
     }
   }
+
+  // GLOBAL LOGIC: Use white theme at the top of ANY page
+  const useWhiteTheme = !scrolled
 
   return (
     <>
@@ -61,29 +69,62 @@ export default function Navbar() {
         <div className="progress-bar" style={{ width: `${progress}%` }} />
       </div>
       <nav className={scrolled ? 'scrolled' : ''} style={{ zIndex: menuOpen ? 10001 : 1000 }}>
-        <Link to="/" className="logo">
-          <img src="/logo.png" alt="" className="logo-img" onError={e => e.target.style.display = 'none'} />
-          Upekkha
+        <Link to="/" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '15px', textDecoration: 'none' }}>
+          <img 
+            src={useWhiteTheme ? "/logo-white.png" : "/logo-blue.png"} 
+            alt="Upekkha Logo" 
+            className="logo-img" 
+            style={{ 
+              transition: 'all 0.3s ease',
+              width: '60px', 
+              height: 'auto',
+              display: 'block'
+            }}
+            onError={e => e.target.style.display = 'none'} 
+          />
+          <span className={useWhiteTheme ? "force-white-text" : ""}>
+            Upekkha
+          </span>
         </Link>
+
         <ul className={`nav-links${menuOpen ? ' active' : ''}`}>
           {NAV_LINKS.map(link => (
             <li key={link.label}>
-              <a href={link.href} onClick={e => { e.preventDefault(); handleNav(link.href) }}>
+              <a 
+                href={link.href} 
+                onClick={e => { e.preventDefault(); handleNav(link.href) }}
+                className={useWhiteTheme ? "force-white-link" : ""}
+              >
                 {link.label}
               </a>
             </li>
           ))}
         </ul>
+
         <button
           className={`mobile-menu${menuOpen ? ' active' : ''}`}
           onClick={() => setMenuOpen(v => !v)}
           aria-label="Toggle menu"
-          aria-expanded={menuOpen}
         >
-          <span /><span /><span />
+          <span className={useWhiteTheme ? "force-white-bg" : ""} />
+          <span className={useWhiteTheme ? "force-white-bg" : ""} />
+          <span className={useWhiteTheme ? "force-white-bg" : ""} />
         </button>
       </nav>
       {menuOpen && <div className="nav-overlay" onClick={() => setMenuOpen(false)} aria-hidden="true" />}
+      
+      <style>{`
+        nav:not(.scrolled) .logo span.force-white-text {
+          color: white !important;
+        }
+        nav:not(.scrolled) .nav-links a.force-white-link {
+          color: white !important;
+          opacity: 1 !important;
+        }
+        nav:not(.scrolled) .mobile-menu span.force-white-bg {
+          background-color: white !important;
+        }
+      `}</style>
     </>
   )
 }
