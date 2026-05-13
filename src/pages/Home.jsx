@@ -142,12 +142,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Programs Section */}
-      <section ref={programsRef} id="programs" className={`our-programs fade-in${programsVisible ? ' visible' : ''}`}>
+      {/* Programs Section - Updated Background */}
+      <section 
+        ref={programsRef} 
+        id="programs" 
+        className={`our-programs fade-in${programsVisible ? ' visible' : ''}`}
+        style={{ backgroundColor: '#f9f9f9', padding: '80px 20px' }}
+      >
         <h2 className="section-title">Our Programs</h2>
         <div className="programs-grid">
           {PROGRAMS.map(prog => (
-            <div key={prog.title} className="program-card" onClick={() => prog.href.startsWith('/') && prog.href !== '#' && navigate(prog.href)} style={{ cursor: prog.href.startsWith('/') && prog.href !== '#' ? 'pointer' : 'default' }}>
+            <div key={prog.title} className="program-card" onClick={() => prog.href.startsWith('/') && prog.href !== '#' && navigate(prog.href)} style={{ cursor: prog.href.startsWith('/') && prog.href !== '#' ? 'pointer' : 'default', backgroundColor: 'white' }}>
               <div className="program-image" style={{ backgroundImage: `url('${prog.img}')` }} />
               <div className="program-content">
                 <h3>{prog.title}</h3>
@@ -161,9 +166,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Founder's Note Section */}
-      <section ref={galleryRef} className={`testimonial-gallery-section fade-in${galleryVisible ? ' visible' : ''}`}>
-        <div className="testimonial-block">
+      {/* Founder's Note Section - Updated Background */}
+      <section 
+        ref={galleryRef} 
+        className={`testimonial-gallery-section fade-in${galleryVisible ? ' visible' : ''}`}
+        style={{ background: 'linear-gradient(to bottom, #ffffff, #f0f4f8)', padding: '100px 0' }}
+      >
+        <div className="testimonial-block" style={{ backgroundColor: 'white', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', borderRadius: '12px' }}>
           <p className="founder-label">Founder's Note</p>
 
           <p className="testimonial-quote testimonial-opening" style={{ fontStyle: 'italic', marginBottom: '2rem' }}>
