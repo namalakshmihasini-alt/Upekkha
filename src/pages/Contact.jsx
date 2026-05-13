@@ -1,8 +1,6 @@
 import { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-// You can use icons from a library like react-icons, or simple high-quality SVGs/images
-// If using react-icons: npm install react-icons
 import { FaInstagram, FaLinkedinIn, FaEnvelope } from 'react-icons/fa'
 
 export default function Contact() {
@@ -13,14 +11,14 @@ export default function Contact() {
       name: 'LinkedIn',
       icon: <FaLinkedinIn />,
       handle: 'Upekkha Foundation',
-      link: 'https://linkedin.com/company/upekkha-foundation', // Update with real link
+      link: 'https://linkedin.com/company/upekkha-foundation', 
       color: '#0077b5'
     },
     {
       name: 'Instagram',
       icon: <FaInstagram />,
       handle: '@upekkha.foundation',
-      link: 'https://instagram.com/upekkha.foundation', // Update with real link
+      link: 'https://instagram.com/upekkha.foundation', 
       color: '#E1306C'
     },
     {
@@ -36,16 +34,44 @@ export default function Contact() {
     <div style={{ backgroundColor: '#fcfdfe', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navbar />
 
-      {/* Header Section */}
+      {/* Updated Header Section to match Astitva.jsx */}
       <section style={{ 
-        padding: '10rem 5% 4rem', 
-        background: 'linear-gradient(135deg, #001F54 0%, #003080 100%)',
-        textAlign: 'center',
-        color: 'white'
+        minHeight: '42vh', 
+        background: 'linear-gradient(rgba(0,31,84,0.88), rgba(0,31,84,0.96))', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        textAlign: 'center', 
+        padding: '9rem 5% 4rem' 
       }}>
-        <h1 style={{ fontFamily: "'Noto Serif Devanagari', serif", fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 700 }}>Get in Touch</h1>
-        <div style={{ width: '60px', height: '3px', background: '#FFB703', margin: '1.5rem auto', borderRadius: '2px' }} />
-        <p style={{ fontFamily: "'Lato', sans-serif", fontSize: '1.1rem', opacity: 0.8, maxWidth: '600px', margin: '0 auto' }}>
+        <div>
+          <h1 style={{ 
+            fontFamily: "'Noto Serif Devanagari', serif", 
+            color: 'white', 
+            fontSize: 'clamp(2.5rem, 6vw, 4rem)', 
+            lineHeight: 1.15, 
+            fontWeight: 700 
+          }}>Get in Touch</h1>
+          <div style={{ 
+            width: '56px', 
+            height: '3px', 
+            background: '#FFB703', 
+            borderRadius: '2px', 
+            margin: '0.9rem auto 0' 
+          }} />
+        </div>
+      </section>
+
+      {/* Intro Text (Optional, based on Astitva's structure) */}
+      <section style={{ padding: '4rem 5% 0', textAlign: 'center' }}>
+         <p style={{ 
+            fontFamily: "'Lato', sans-serif", 
+            fontSize: '1.1rem', 
+            color: '#333', 
+            maxWidth: '600px', 
+            margin: '0 auto',
+            lineHeight: 1.8 
+          }}>
           Connect with us on social media or reach out via email. We are always open to collaborations and conversations.
         </p>
       </section>
