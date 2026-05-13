@@ -33,17 +33,6 @@ const PROGRAMS = [
   },
 ]
 
-const PEOPLE = [
-  { name: 'Akshat Mehndirata', role: 'Founder', photo: 'akshat' },
-  { name: 'Swarada Desai', role: 'Core Team', photo: 'swarada' },
-  { name: 'Yashodhara Dravid', role: 'Core Team', photo: 'yashodhara' },
-  { name: 'Sandali Kale', role: 'Core Team', photo: 'sandali' },
-  { name: 'Kapish', role: 'Core Team', photo: 'kapish' },
-  { name: 'Lakshmi Hasini', role: 'Core Team', photo: 'lakshmi' },
-  { name: 'Kasturi Thorat', role: 'Advisor', photo: 'kasturi' },
-  { name: 'Amruuta Pawar', role: 'Advisor', photo: 'amruuta' },
-]
-
 const GALLERY_IMGS = ['4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg']
 
 const FOUNDER_PARAGRAPHS = [
@@ -64,24 +53,6 @@ function StatItem({ target, suffix, label, active }) {
   )
 }
 
-function PersonCard({ name, role, photo }) {
-  const initials = name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
-  const srcs = [`/${photo}.jpg`, `/${photo}.jpeg`]
-  const [imgIdx, setImgIdx] = useState(0)
-  return (
-    <div className="person-card">
-      <div className="person-photo-wrap">
-        {imgIdx < srcs.length
-          ? <img key={srcs[imgIdx]} src={srcs[imgIdx]} alt={name} className="person-photo-img" onError={() => setImgIdx(i => i + 1)} />
-          : <div className="person-photo-fallback">{initials}</div>
-        }
-      </div>
-      <div className="person-name">{name}</div>
-      <div className="person-position">{role}</div>
-    </div>
-  )
-}
-
 export default function Home() {
   const navigate = useNavigate()
   const location = useLocation()
@@ -89,7 +60,6 @@ export default function Home() {
   const [aboutRef, aboutVisible] = useFadeIn()
   const [impactRef, impactVisible] = useFadeIn()
   const [programsRef, programsVisible] = useFadeIn()
-  const [peopleRef, peopleVisible] = useFadeIn()
   const [galleryRef, galleryVisible] = useFadeIn()
 
   useEffect(() => {
@@ -107,14 +77,13 @@ export default function Home() {
     el && el.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
-  const loopedPeople = [...PEOPLE, ...PEOPLE, ...PEOPLE]
   const loopedGallery = [...GALLERY_IMGS, ...GALLERY_IMGS]
 
   return (
     <>
       <Navbar />
 
-      {/* Hero Section with Lightened Navy-Teal Gradient */}
+      {/* Hero Section */}
       <section
         className="hero"
         id="home"
@@ -190,14 +159,6 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* People Section */}
-      <section ref={peopleRef} className={`our-people fade-in${peopleVisible ? ' visible' : ''}`}>
-        <h2 className="section-title">Our People</h2>
-        <AutoScroll loopFraction={1 / 3} speed={0.85}>
-          {loopedPeople.map((p, i) => <PersonCard key={`${p.name}-${i}`} {...p} />)}
-        </AutoScroll>
       </section>
 
       {/* Founder's Note Section */}
